@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#f5ecd7">
+<title>Հայաստան — Մեծ Տիգրանի Ժառանգությունը</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@400;600;700;900&family=Noto+Sans+Armenian:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  :root {
+    --cream: #f5ecd7;
+    --cream-light: #faf3e3;
+    --parchment: #ede0c4;
+    --burgundy: #7a1f1f;
+    --gold: #b8860b;
+    --gold-light: #d4a843;
+    --brown: #4a2c1a;
+    --ink: #2b1810;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Noto Serif Armenian', Georgia, serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.75;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(184,134,11,0.05), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(122,31,31,0.05), transparent 40%);
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      repeating-linear-gradient(90deg, transparent 0, transparent 78px, rgba(184,134,11,0.04) 78px, rgba(184,134,11,0.04) 80px),
+      repeating-linear-gradient(0deg, transparent 0, transparent 78px, rgba(184,134,11,0.04) 78px, rgba(184,134,11,0.04) 80px);
+    pointer-events: none; z-index: 0;
+  }
+
+  .ornament-top, .ornament-bottom {
+    position: fixed; left: 0; right: 0; height: 14px;
+    background: repeating-linear-gradient(90deg,
+      var(--burgundy) 0, var(--burgundy) 8px,
+      var(--gold) 8px, var(--gold) 16px,
+      var(--brown) 16px, var(--brown) 24px,
+      var(--gold) 24px, var(--gold) 32px);
+    z-index: 500;
+  }
+  .ornament-top { top: 0; }
+  .ornament-bottom { bottom: 0; }
+
+  /* NAV */
+  .main-nav {
+    position: fixed; top: 14px; left: 0; right: 0;
+    padding: calc(12px + var(--safe-top)) 18px 12px;
+    background: rgba(245,236,215,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(184,134,11,0.25);
+    z-index: 100;
+  }
+
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 15px;
+  }
+
+  .brand { display: flex; align-items: center; gap: 10px; cursor: pointer; flex-shrink: 0; }
+
+  .brand-mark {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--burgundy); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(122,31,31,0.3);
+  }
+
+  .brand-text {
+    font-weight: 700; font-size: 0.95rem;
+    letter-spacing: 2px; line-height: 1;
+  }
+
+  .brand-text small {
+    display: block; font-size: 0.6rem;
+    letter-spacing: 3px; color: var(--burgundy);
+    font-weight: 400; margin-top: 3px;
+    font-family: 'Noto Sans Armenian', sans-serif;
+  }
+
+  .desktop-nav { display: none; gap: 4px; }
+
+  .desktop-nav a {
+    padding: 8px 14px; color: var(--brown);
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.82rem; font-weight: 500;
+    border-radius: 20px; transition: all 0.3s;
+    cursor: pointer; white-space: nowrap;
+  }
+
+  .desktop-nav a:hover, .desktop-nav a.active {
+    color: var(--burgundy); background: rgba(122,31,31,0.08);
+  }
+
+  .menu-btn {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: transparent; border: 1.5px solid var(--burgundy);
+    color: var(--burgundy); display: flex;
+    align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .menu-btn:active { background: var(--burgundy); color: var(--cream); }
+
+  /* MOBILE MENU */
+  .nav-overlay {
+    position: fixed; inset: 0;
+    background: rgba(43,24,16,0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 150; opacity: 0; visibility: hidden;
+    transition: all 0.4s;
+  }
+  .nav-overlay.open { opacity: 1; visibility: visible; }
+
+  .nav-menu {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(85%, 360px);
+    background: var(--cream-light); z-index: 200;
+    padding: calc(80px + var(--safe-top)) 28px calc(40px + var(--safe-bottom));
+    transform: translateX(110%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+    border-left: 6px solid var(--burgundy);
+  }
+  .nav-menu.open { transform: translateX(0); }
+
+  .nav-menu .menu-label {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.7rem; letter-spacing: 5px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 20px; font-weight: 500;
+  }
+
+  .nav-menu a {
+    display: flex; align-items: center;
+    justify-content: space-between; padding: 15px 0;
+    color: var(--ink); font-size: 1.05rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(184,134,11,0.2);
+    cursor: pointer;
+  }
+
+  .nav-menu a .num {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.7rem; letter-spacing: 2px;
+    color: var(--gold);
+  }
+
+  .nav-menu a:active, .nav-menu a.active {
+    color: var(--burgundy); padding-left: 12px;
+  }
+
+  .close-btn {
+    position: absolute; top: calc(18px + var(--safe-top));
+    right: 22px; width: 42px; height: 42px;
+    border-radius: 50%; background: transparent;
+    border: 1.5px solid var(--burgundy); color: var(--burgundy);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; cursor: pointer;
+  }
+
+  /* PAGES */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding-top: calc(80px + var(--safe-top));
+    padding-bottom: calc(60px + var(--safe-bottom));
+    animation: pageIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative; z-index: 1;
+  }
+  .page.active { display: block; }
+
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page-hero {
+    padding: 50px 22px 40px; max-width: 900px;
+    margin: 0 auto; text-align: center;
+  }
+
+  .page-number {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.7rem; letter-spacing: 6px;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 15px; font-weight: 500;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 9vw, 3.8rem);
+    font-weight: 900; color: var(--ink);
+    line-height: 1.1; letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  .page-title .accent { color: var(--burgundy); font-style: italic; }
+
+  .page-subtitle {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: clamp(0.9rem, 3.6vw, 1.05rem);
+    color: var(--brown); font-weight: 300;
+    max-width: 650px; margin: 0 auto;
+  }
+
+  .page-ornament {
+    display: flex; align-items: center;
+    justify-content: center; gap: 15px;
+    color: var(--gold); margin: 25px 0;
+  }
+  .page-ornament::before, .page-ornament::after {
+    content: ''; width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 22px; }
+  .container-narrow { max-width: 850px; margin: 0 auto; padding: 0 22px; }
+
+  /* HOME */
+  .home-hero {
+    min-height: calc(100dvh - 80px);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 40px 22px;
+    position: relative;
+  }
+
+  .corner {
+    position: absolute; width: 50px; height: 50px;
+    opacity: 0.3; color: var(--burgundy);
+    pointer-events: none;
+  }
+  .corner.tl { top: 40px; left: 15px; }
+  .corner.tr { top: 40px; right: 15px; transform: scaleX(-1); }
+  .corner.bl { bottom: 40px; left: 15px; transform: scaleY(-1); }
+  .corner.br { bottom: 40px; right: 15px; transform: scale(-1); }
+
+  .hero-tag {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: clamp(0.65rem, 2.8vw, 0.8rem);
+    letter-spacing: 6px; text-transform: uppercase;
+    color: var(--burgundy); margin-bottom: 25px;
+    font-weight: 500;
+    display: inline-flex; align-items: center; gap: 15px;
+  }
+
+  .hero-tag::before, .hero-tag::after {
+    content: ''; width: 35px; height: 1px;
+    background: var(--burgundy);
+  }
+
+  .hero-flag {
+    width: clamp(180px, 55vw, 280px);
+    border-radius: 3px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.1), 0 20px 40px rgba(74,44,26,0.15), 0 40px 80px rgba(74,44,26,0.1);
+    margin-bottom: 30px;
+    border: 1px solid rgba(184,134,11,0.3);
+  }
+
+  .home-hero h1 {
+    font-size: clamp(2.8rem, 14vw, 6rem);
+    font-weight: 900; color: var(--ink);
+    line-height: 0.95; letter-spacing: -3px;
+    margin-bottom: 18px;
+  }
+  .home-hero h1 .accent { color: var(--burgundy); }
+
+  .home-hero .sub {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: clamp(1rem, 4.2vw, 1.3rem);
+    color: var(--brown); font-weight: 300;
+    letter-spacing: 2px; margin-bottom: 35px;
+  }
+
+  .home-hero .motto {
+    font-style: italic;
+    font-size: clamp(0.9rem, 3.6vw, 1.05rem);
+    color: var(--brown); max-width: 560px;
+    padding: 20px 25px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    margin-bottom: 35px;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 15px 32px; background: var(--burgundy);
+    color: var(--cream);
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.9rem; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    border: none; border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(122,31,31,0.25);
+  }
+  .btn:active { transform: scale(0.96); }
+
+  /* QUICK LINKS */
+  .quick-links { padding: 60px 22px 80px; max-width: 1100px; margin: 0 auto; }
+  .quick-links h2 {
+    text-align: center;
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+    font-weight: 700; color: var(--ink); margin-bottom: 15px;
+  }
+
+  .quick-links > p {
+    text-align: center; color: var(--brown);
+    font-weight: 300; max-width: 550px;
+    margin: 0 auto 45px;
+    font-size: clamp(0.9rem, 3.5vw, 1rem);
+  }
+
+  .links-grid {
+    display: grid; grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .link-card {
+    background: var(--cream-light);
+    border: 1px solid rgba(184,134,11,0.25);
+    text-decoration: none; color: var(--ink);
+    cursor: pointer; display: block;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+
+  .link-card:active {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(74,44,26,0.12);
+  }
+
+  .link-card-img {
+    width: 100%; height: 170px;
+    object-fit: cover; display: block;
+    background: linear-gradient(135deg, var(--parchment), var(--cream-light));
+    border-bottom: 1px solid rgba(184,134,11,0.25);
+  }
+
+  .link-card-body { padding: 24px 22px 26px; }
+
+  .link-num {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.7rem; letter-spacing: 4px;
+    color: var(--gold); margin-bottom: 10px; font-weight: 500;
+  }
+
+  .link-card h3 {
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 8px;
+  }
+
+  .link-card p {
+    color: var(--brown); font-size: 0.9rem;
+    font-weight: 300; line-height: 1.6; margin-bottom: 14px;
+  }
+
+  .link-arrow {
+    color: var(--burgundy);
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.75rem; letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 500;
+  }
+
+  /* CONTENT */
+  .content-block {
+    background: var(--cream-light);
+    padding: 35px 26px;
+    border: 1px solid rgba(184,134,11,0.3);
+    box-shadow: 0 25px 60px rgba(74,44,26,0.06);
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  .content-block::before {
+    content: ''; position: absolute; inset: 8px;
+    border: 1px solid rgba(184,134,11,0.18);
+    pointer-events: none;
+  }
+
+  .content-block p {
+    color: var(--ink);
+    font-size: clamp(0.95rem, 3.8vw, 1.08rem);
+    margin-bottom: 18px; text-align: justify;
+    position: relative;
+  }
+  .content-block p:last-child { margin-bottom: 0; }
+
+  .content-block strong {
+    color: var(--burgundy); font-weight: 700;
+    background: linear-gradient(180deg, transparent 65%, rgba(212,168,67,0.4) 65%);
+    padding: 0 2px;
+  }
+
+  .content-block em { color: var(--burgundy); font-style: italic; font-weight: 600; }
+
+  .content-heading {
+    font-size: clamp(1.4rem, 5.5vw, 1.9rem);
+    font-weight: 700; color: var(--ink);
+    margin: 45px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(184,134,11,0.3);
+    position: relative;
+  }
+  .content-heading::before {
+    content: '❖'; color: var(--burgundy);
+    margin-right: 15px; font-size: 0.9em;
+  }
+  .content-heading:first-child { margin-top: 0; }
+
+  /* KINGS */
+  .kings-grid {
+    display: grid; grid-template-columns: 1fr;
+    gap: 28px; margin-top: 30px;
+  }
+
+  .king-card {
+    background: var(--cream-light);
+    border: 1px solid rgba(184,134,11,0.3);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .king-portrait-wrap {
+    width: 100%; aspect-ratio: 1 / 1;
+    overflow: hidden; position: relative;
+    background: linear-gradient(180deg, var(--parchment), var(--cream));
+  }
+
+  .king-portrait {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    filter: sepia(0.15) contrast(1.05);
+  }
+
+  .king-body { padding: 22px 20px 26px; }
+
+  .king-card h3 {
+    font-size: clamp(1.15rem, 5vw, 1.35rem);
+    font-weight: 700; color: var(--ink); margin-bottom: 6px;
+  }
+
+  .king-card .years {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.75rem; letter-spacing: 3px;
+    color: var(--burgundy); margin-bottom: 14px;
+    font-weight: 500; display: inline-block;
+    padding: 3px 12px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+  }
+
+  .king-card p {
+    color: var(--brown);
+    font-size: clamp(0.85rem, 3.4vw, 0.93rem);
+    line-height: 1.65; font-weight: 300; text-align: left;
+  }
+
+  /* FLAGS */
+  .flags-grid {
+    display: grid; grid-template-columns: 1fr;
+    gap: 25px; margin-top: 30px;
+  }
+
+  .flag-card {
+    background: var(--cream-light);
+    border: 1px solid rgba(184,134,11,0.3);
+    padding: 20px;
+  }
+
+  .flag-visual {
+    width: 100%; aspect-ratio: 3 / 2;
+    overflow: hidden; margin-bottom: 18px;
+    border: 1px solid rgba(184,134,11,0.4);
+    background: var(--parchment);
+    position: relative;
+  }
+
+  .flag-visual img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .flag-card h4 {
+    font-size: clamp(1rem, 4vw, 1.15rem);
+    font-weight: 700; color: var(--ink); margin-bottom: 8px;
+  }
+
+  .flag-card .era {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.72rem; letter-spacing: 3px;
+    color: var(--burgundy); margin-bottom: 10px; font-weight: 500;
+  }
+
+  .flag-card p {
+    color: var(--brown);
+    font-size: clamp(0.82rem, 3.3vw, 0.9rem);
+    line-height: 1.6; font-weight: 300; text-align: left;
+  }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 30px; margin-top: 30px; }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 8px; top: 15px; bottom: 15px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--burgundy), var(--gold), var(--burgundy));
+  }
+
+  .timeline-item { position: relative; padding-bottom: 35px; }
+
+  .timeline-item::before {
+    content: ''; position: absolute;
+    left: -30px; top: 8px;
+    width: 18px; height: 18px;
+    border-radius: 50%; background: var(--cream);
+    border: 3px solid var(--burgundy);
+    box-shadow: 0 0 0 4px var(--cream);
+  }
+
+  .timeline-item .date {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.72rem; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+    font-weight: 500; margin-bottom: 8px;
+  }
+
+  .timeline-item h4 {
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 10px;
+  }
+
+  .timeline-item p {
+    color: var(--brown); font-size: 0.92rem;
+    font-weight: 300; line-height: 1.65;
+  }
+
+  /* GALLERY */
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 12px; margin-top: 30px;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    border: 1px solid rgba(184,134,11,0.3);
+    overflow: hidden; position: relative;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--parchment), var(--cream-light));
+  }
+
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+
+  .gallery-caption {
+    position: absolute; bottom: 0;
+    left: 0; right: 0;
+    padding: 20px 10px 10px;
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.68rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--cream);
+    background: linear-gradient(180deg, transparent, rgba(43,24,16,0.85));
+    font-weight: 500;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: linear-gradient(135deg, var(--burgundy), #5a1010);
+    color: var(--cream); padding: 35px 28px;
+    margin: 30px 0; position: relative;
+    overflow: hidden;
+  }
+
+  .callout::before {
+    content: '❝'; position: absolute;
+    top: 15px; left: 20px; font-size: 4rem;
+    color: var(--gold-light); opacity: 0.3;
+    line-height: 1; font-family: serif;
+  }
+
+  .callout p {
+    font-style: italic;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    line-height: 1.65;
+    position: relative; z-index: 1;
+    margin-bottom: 15px; color: var(--cream);
+  }
+
+  .callout .author {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.8rem; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-style: normal; font-weight: 500;
+  }
+
+  /* STATS */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 15px; margin: 30px 0;
+  }
+
+  .stat-box {
+    background: var(--cream-light);
+    border: 1px solid rgba(184,134,11,0.3);
+    padding: 22px 15px; text-align: center;
+  }
+
+  .stat-box .num {
+    font-size: clamp(1.6rem, 7vw, 2.3rem);
+    font-weight: 900; color: var(--burgundy);
+    line-height: 1; margin-bottom: 8px;
+  }
+
+  .stat-box .label {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.72rem; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--brown);
+    font-weight: 500;
+  }
+
+  /* CONTENT IMAGE */
+  .content-img {
+    width: 100%; height: auto;
+    max-height: 480px; object-fit: cover;
+    margin: 25px 0;
+    border: 1px solid rgba(184,134,11,0.3);
+    box-shadow: 0 20px 50px rgba(74,44,26,0.15);
+    display: block;
+    background: linear-gradient(135deg, var(--parchment), var(--cream-light));
+    min-height: 200px;
+  }
+
+  .content-img-caption {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.8rem; color: var(--brown);
+    font-style: italic; text-align: center;
+    margin-top: -15px; margin-bottom: 25px;
+    opacity: 0.85;
+  }
+
+  /* NEXT/PREV */
+  .next-prev {
+    display: grid; grid-template-columns: 1fr;
+    gap: 15px; margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(184,134,11,0.3);
+  }
+
+  .next-link {
+    padding: 22px 24px;
+    background: var(--cream-light);
+    border: 1px solid rgba(184,134,11,0.3);
+    color: var(--ink); cursor: pointer;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 15px;
+  }
+
+  .next-link:active {
+    transform: translateX(4px);
+    border-color: var(--gold);
+    background: var(--parchment);
+  }
+
+  .next-link .label {
+    font-family: 'Noto Sans Armenian', sans-serif;
+    font-size: 0.7rem; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold);
+    font-weight: 500; margin-bottom: 6px;
+  }
+
+  .next-link .title {
+    font-size: 1.05rem; font-weight: 700; color: var(--ink);
+  }
+
+  .next-link .arrow {
+    color: var(--burgundy); font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  .site-footer {
+    background: var(--ink); color: var(--cream);
+    padding: 50px 22px calc(40px + var(--safe-bottom));
+    text-align: center;
+    position: relative; z-index: 1;
+    margin-top: 60px;
+  }
+
+  .site-footer::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 6px;
+    background: repeating-linear-gradient(90deg,
+      var(--burgundy) 0, var(--burgundy) 20px,
+      var(--gold) 20px, var(--gold) 40px);
+  }
+
+  .footer-flag {
+    display: inline-block;
+    width: 80px; height: 50px;
+    margin-bottom: 22px;
+    object-fit: contain;
+    background: rgba(255,255,255,0.05);
+    padding: 3px;
+  }
+
+  .site-footer h4 {
+    font-size: 1.2rem; color: var(--cream);
+    margin-bottom: 10px; font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .site-footer p {
+    color: rgba(245,236,215,0.6);
+    font-size: 0.85rem; font-weight: 300;
+    margin-bottom: 6px;
+    font-family: 'Noto Sans Armenian', sans-serif;
+  }
+
+  .site-footer .motto-line {
+    color: var(--gold-light); font-style: italic;
+    font-size: 0.95rem; margin-top: 20px;
+    letter-spacing: 1px;
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+
+  /* SCROLL TOP */
+  .scroll-top {
+    position: fixed;
+    bottom: calc(30px + var(--safe-bottom));
+    right: 20px; width: 46px; height: 46px;
+    border-radius: 50%; background: var(--burgundy);
+    border: none; color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; cursor: pointer;
+    box-shadow: 0 10px 30px rgba(122,31,31,0.3);
+    z-index: 90; opacity: 0; visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s;
+  }
+
+  .scroll-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (min-width: 640px) {
+    .links-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+    .kings-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    .flags-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .next-prev { grid-template-columns: 1fr 1fr; }
+    .content-block { padding: 45px 40px; }
+    .container, .container-narrow { padding: 0 40px; }
+  }
+
+  @media (min-width: 1024px) {
+    .links-grid { grid-template-columns: repeat(3, 1fr); }
+    .kings-grid { grid-template-columns: repeat(3, 1fr); }
+    .flags-grid { grid-template-columns: repeat(3, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+    .container, .container-narrow { padding: 0 60px; }
+    .desktop-nav { display: flex; }
+    .menu-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ornament-top"></div>
+<div class="ornament-bottom"></div>
+
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a class="brand" onclick="router.go('home')">
+      <div class="brand-mark">Հ</div>
+      <div class="brand-text">ՀԱՅԱՍՏԱՆ<small>ՈՍԿԵ ԴԱՐ</small></div>
+    </a>
+    <div class="desktop-nav">
+      <a data-route="home">Գլխավոր</a>
+      <a data-route="history">Պատմություն</a>
+      <a data-route="kings">Թագավորներ</a>
+      <a data-route="flags">Դրոշներ</a>
+      <a data-route="tigran">Տիգրան Մեծ</a>
+      <a data-route="timeline">Ժամանակագիծ</a>
+      <a data-route="culture">Մշակույթ</a>
+      <a data-route="gallery">Պատկերասրահ</a>
+    </div>
+    <div class="menu-btn" id="menuBtn">☰</div>
+  </div>
+</nav>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-menu" id="navMenu">
+  <div class="close-btn" id="closeBtn">✕</div>
+  <div class="menu-label">ՑԱՆԿ</div>
+  <a data-route="home"><span>Գլխավոր</span><span class="num">01</span></a>
+  <a data-route="history"><span>Պատմություն</span><span class="num">02</span></a>
+  <a data-route="kings"><span>Թագավորներ</span><span class="num">03</span></a>
+  <a data-route="flags"><span>Դրոշներ</span><span class="num">04</span></a>
+  <a data-route="tigran"><span>Տիգրան Մեծ</span><span class="num">05</span></a>
+  <a data-route="timeline"><span>Ժամանակագիծ</span><span class="num">06</span></a>
+  <a data-route="culture"><span>Մշակույթ</span><span class="num">07</span></a>
+  <a data-route="gallery"><span>Պատկերասրահ</span><span class="num">08</span></a>
+</nav>
+
+<!-- ==================== HOME ==================== -->
+<div class="page" id="page-home">
+  <div class="home-hero">
+    <svg class="corner tl" viewBox="0 0 60 60" fill="none"><path d="M0 30 Q0 0 30 0 M5 30 Q5 5 30 5 M10 30 Q10 10 30 10" stroke="currentColor" stroke-width="1.5"/><circle cx="30" cy="30" r="3" fill="currentColor"/></svg>
+    <svg class="corner tr" viewBox="0 0 60 60" fill="none"><path d="M0 30 Q0 0 30 0 M5 30 Q5 5 30 5 M10 30 Q10 10 30 10" stroke="currentColor" stroke-width="1.5"/><circle cx="30" cy="30" r="3" fill="currentColor"/></svg>
+    <svg class="corner bl" viewBox="0 0 60 60" fill="none"><path d="M0 30 Q0 0 30 0 M5 30 Q5 5 30 5 M10 30 Q10 10 30 10" stroke="currentColor" stroke-width="1.5"/><circle cx="30" cy="30" r="3" fill="currentColor"/></svg>
+    <svg class="corner br" viewBox="0 0 60 60" fill="none"><path d="M0 30 Q0 0 30 0 M5 30 Q5 5 30 5 M10 30 Q10 10 30 10" stroke="currentColor" stroke-width="1.5"/><circle cx="30" cy="30" r="3" fill="currentColor"/></svg>
+
+    <div class="hero-tag">ՈՍԿԵ ԴԱՐ</div>
+
+    <img class="hero-flag" src="images/flag-am.png" alt="Հայաստանի դրոշ">
+
+    <h1>ՀԱՅԱՍՏԱՆ<span class="accent">.</span></h1>
+    <p class="sub">Մեծ Տիգրանի ժառանգությունը</p>
+    <p class="motto">«Ծովից ծով Հայաստան» — հզորության, մշակույթի և փառքի ոսկե դար</p>
+
+    <button class="btn" onclick="router.go('history')">Սկսել ճամփորդությունը <span>→</span></button>
+  </div>
+
+  <div class="quick-links">
+    <h2>Ի՞նչ կգտնեք այստեղ</h2>
+    <p>Ութ բաժիններ՝ նվիրված հայոց պատմության ամենափառահեղ ժամանակաշրջանին</p>
+
+    <div class="links-grid">
+      <div class="link-card reveal" onclick="router.go('history')">
+        <div class="img-box" style="height:170px;">
+          <img class="link-card-img" src="images/urartu.jpg" alt="Ուրարտու">
+        </div>
+        <div class="link-card-body">
+          <div class="link-num">01 — ՊԱՏՄՈՒԹՅՈՒՆ</div>
+          <h3>Հազարամյա ժառանգություն</h3>
+          <p>Ուրարտուից մինչև Տիգրան Մեծ՝ հայ ժողովրդի հարուստ պատմությունը</p>
+          <span class="link-arrow">Կարդալ →</span>
+        </div>
+      </div>
+
+      <div class="link-card reveal" onclick="router.go('kings')">
+        <div class="img-box" style="height:170px;">
+          <img class="link-card-img" src="images/tigran1.jpg" alt="Թագավորներ">
+        </div>
+        <div class="link-card-body">
+          <div class="link-num">02 — ԹԱԳԱՎՈՐՆԵՐ</div>
+          <h3>Մեծ արքաներ</h3>
+          <p>Տիգրան Մեծ, Արտաշես Ա, Տրդատ Գ Մեծ և մյուս գահակալները</p>
+          <span class="link-arrow">Ծանոթանալ →</span>
+        </div>
+      </div>
+
+      <div class="link-card reveal" onclick="router.go('flags')">
+        <div class="img-box" style="height:170px;">
+          <img class="link-card-img" src="images/flag-am.png" alt="Դրոշներ" style="object-fit:contain;">
+        </div>
+        <div class="link-card-body">
+          <div class="link-num">03 — ԴՐՈՇՆԵՐ</div>
+          <h3>Պատմական դրոշներ</h3>
+          <p>Ուրարտուից, Արտաշեսյաններից մինչև մեր օրերի եռագույնը</p>
+          <span class="link-arrow">Տեսնել →</span>
+        </div>
+      </div>
+
+      <div class="link-card reveal" onclick="router.go('tigran')">
+        <div class="img-box" style="height:170px;">
+          <img class="link-card-img" src="images/tigran2.jpg" alt="Տիգրան">
+        </div>
+        <div class="link-card-body">
+          <div class="link-num">04 — ՏԻԳՐԱՆ ՄԵԾ</div>
+          <h3>Կայսրության արքան</h3>
+          <p>Ամենահզոր հայ արքայի պատմությունը, նվաճումներն ու ժառանգությունը</p>
+          <span class="link-arrow">Կարդալ →</span>
+        </div>
+      </div>
+
+      <div class="link-card reveal" onclick="router.go('culture')">
+        <div class="img-box" style="height:170px;">
+          <img class="link-card-img" src="images/matenadaran.jpg" alt="Մշակույթ">
+        </div>
+        <div class="link-card-body">
+          <div class="link-num">06 — ՄՇԱԿՈՒՅԹ</div>
+          <h3>Հոգևոր ժառանգություն</h3>
+          <p>Այբուբեն, խաչքարեր, ձեռագրեր, ճարտարապետություն և երաժշտություն</p>
+          <span class="link-arrow">Բացահայտել →</span>
+        </div>
+      </div>
+
+      <div class="link-card reveal" onclick="router.go('gallery')">
+        <div class="img-box" style="height:170px;">
+          <img class="link-card-img" src="images/geghard.jpg" alt="Պատկերասրահ">
+        </div>
+        <div class="link-card-body">
+          <div class="link-num">07 — ՊԱՏԿԵՐԱՍՐԱՀ</div>
+          <h3>Խորհրդանիշներ</h3>
+          <p>Տեսողական ճամփորդություն հայկական մշակույթի սրբազան նշաններով</p>
+          <span class="link-arrow">Բացել →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== HISTORY ==================== -->
+<div class="page" id="page-history">
+  <div class="page-hero">
+    <div class="page-number">ԲԱԺԻՆ I</div>
+    <h1 class="page-title">Հազարամյա <span class="accent">ժառանգություն</span></h1>
+    <div class="page-ornament">❖</div>
+    <p class="page-subtitle">Հայ ժողովրդի պատմությունը՝ սկսած հնագույն Ուրարտուից մինչև հզոր կայսրություն</p>
+  </div>
+
+  <div class="container-narrow">
+    <div class="img-box reveal" style="margin: 25px 0;">
+      <img class="content-img" src="images/urartu.jpg" alt="Ուրարտու" style="margin:0;">
+    </div>
+    <p class="content-img-caption">Ուրարտու՝ Հայկական լեռնաշխարհի հնագույն պետությունը</p>
+
+    <div class="content-block reveal">
+      <h3 class="content-heading">Հնագույն սկիզբ</h3>
+      <p>Հայաստանը՝ որպես աշխարհի հնագույն պետություններից մեկը, ունի ավելի քան երեք հազար տարվա պետական պատմություն։ Հայկական լեռնաշխարհը համարվում է մարդկային քաղաքակրթության օրրաններից մեկը։</p>
+      <p><strong>Ուրարտու</strong> թագավորությունը (Ք.ա. 9–6-րդ դդ.), որը հայտնի էր նաև որպես Արարատի թագավորություն, հիմք դրեց հայ պետականությանը։ Ուրարտացիները կառուցեցին հզոր ամրոցներ, ջրանցքներ և թողեցին սեպագիր արձանագրություններ։</p>
+    </div>
+
+    <div class="img-box reveal" style="margin: 25px 0;">
+      <img class="content-img" src="images/erebuni.jpg" alt="Էրեբունի" style="margin:0;">
+    </div>
+    <p class="content-img-caption">Էրեբունի ամրոց — Երևանի հիմքը (Ք.ա. 782 թ.)</p>
+
+    <div class="stats-grid reveal">
+      <div class="stat-box"><div class="num">3000+</div><div class="label">Տարվա պատմություն</div></div>
+      <div class="stat-box"><div class="num">860</div><div class="label">Ք.ա. Ուրարտու</div></div>
+      <div class="stat-box"><div class="num">301</div><div class="label">Քրիստոնեություն</div></div>
+      <div class="stat-box"><div class="num">405</div><div class="label">Հայոց այբուբեն</div></div>
+    </div>
+
+    <div class="content-block reveal">
+      <h3 class="content-heading">Արտաշեսյան հարստություն</h3>
+      <p>Ք.ա. 190 թվականին հիմնվեց <strong>Արտաշեսյան հարստությունը</strong>, որը սկիզբ դրեց հայկական ոսկեդարին։ Արտաշես Ա-ն միավորեց հայկական հողերը և հիմնեց Արտաշատ մայրաքաղաքը։</p>
+      <p>Սակայն Հայաստանի ամենամեծ փառքը կապված է <strong>Տիգրան Մեծի</strong> անվան հետ, ով կերտեց մի կայսրություն, որը ձգվում էր Կասպից ծովից մինչև Միջերկրական։</p>
+    </div>
+
+    <div class="callout reveal">
+      <p>«Երեք ծովերի միջև տարածված Հայոց թագավորությունը ժամանակի ամենահզոր ու ամենահարուստ պետություններից մեկն էր»</p>
+      <div class="author">— Պլուտարքոս, հույն պատմիչ</div>
+    </div>
+
+    <div class="img-box reveal" style="margin: 25px 0;">
+      <img class="content-img" src="images/etchmiadzin.jpg" alt="Էջմիածին" style="margin:0;">
+    </div>
+    <p class="content-img-caption">Էջմիածնի Մայր Տաճարը (301 թ.)</p>
+
+    <div class="content-block reveal">
+      <h3 class="content-heading">Քրիստոնեության ընդունում</h3>
+      <p>301 թվականին Հայաստանը դարձավ աշխարհում <strong>առաջին երկիրը</strong>, որ քրիստոնեությունը ընդունեց որպես պետական կրոն։</p>
+      <p>405 թվականին Մեսրոպ Մաշտոցը ստեղծեց <strong>հայոց այբուբենը</strong>՝ հնարավորություն տալով զարգացնել ազգային մշակույթը։</p>
+    </div>
+
+    <div class="next-prev">
+      <a class="next-link" onclick="router.go('kings')"><div><div class="label">Հաջորդ →</div><div class="title">Մեծ արքաներ</div></div><div class="arrow">→</div></a>
+      <a class="next-link" onclick="router.go('home')"><div><div class="label">← Վերադառնալ</div><div class="title">Գլխավոր էջ</div></div><div class="arrow">←</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== KINGS ==================== -->
+<div class="page" id="page-kings">
+  <div class="page-hero">
+    <div class="page-number">ԲԱԺԻՆ II</div>
+    <h1 class="page-title">Մեծ <span class="accent">արքաներ</span></h1>
+    <div class="page-ornament">❖</div>
+    <p class="page-subtitle">Հայոց պատմության ամենահզոր գահակալները</p>
+  </div>
+
+  <div class="container">
+    <div class="kings-grid">
+      <div class="king-card reveal">
+        <div class="king-portrait-wrap">
+          <img class="king-portrait" src="images/tigran.jpg" alt="Տիգրան Մեծ">
+        </div>
+        <div class="king-body">
+          <h3>Տիգրան Մեծ</h3>
+          <div class="years">Ք.ա. 95–55</div>
+          <p>Հայոց ամենանշանավոր արքան, «Ծովից ծով Հայաստան» կայսրության ստեղծողը։</p>
+        </div>
+      </div>
+
+      <div class="king-card reveal">
+        <div class="king-portrait-wrap">
+          <img class="king-portrait" src="images/artashes.jpg" alt="Արտաշես Ա">
+        </div>
+        <div class="king-body">
+          <h3>Արտաշես Ա</h3>
+          <div class="years">Ք.ա. 189–160</div>
+          <p>Արտաշեսյան արքայատոհմի հիմնադիրը, ով միավորեց հայկական հողերը։</p>
+        </div>
+      </div>
+
+      <div class="king-card reveal">
+        <div class="king-portrait-wrap">
+          <img class="king-portrait" src="images/trdat.jpg" alt="Տրդատ Գ">
+        </div>
+        <div class="king-body">
+          <h3>Տրդատ Գ Մեծ</h3>
+          <div class="years">287–330</div>
+          <p>Արքան, ով 301 թվականին քրիստոնեությունը հռչակեց պետական կրոն։</p>
+        </div>
+      </div>
+
+      <div class="king-card reveal">
+        <div class="king-portrait-wrap">
+          <img class="king-portrait" src="images/ashot.jpg" alt="Աշոտ Ա">
+        </div>
+        <div class="king-body">
+          <h3>Աշոտ Ա Մեծ</h3>
+          <div class="years">885–890</div>
+          <p>Բագրատունյաց հարստության հիմնադիրը, ով վերականգնեց անկախությունը։</p>
+        </div>
+      </div>
+
+      <div class="king-card reveal">
+        <div class="king-portrait-wrap">
+          <img class="king-portrait" src="images/gagik.jpg" alt="Գագիկ Ա">
+        </div>
+        <div class="king-body">
+          <h3>Գագիկ Ա</h3>
+          <div class="years">990–1020</div>
+          <p>Բագրատունյաց ամենահզոր արքան, ով ամրապնդեց պետության հզորությունը։</p>
+        </div>
+      </div>
+
+      <div class="king-card reveal">
+        <div class="king-portrait-wrap">
+          <img class="king-portrait" src="images/levon.jpg" alt="Լևոն II">
+        </div>
+        <div class="king-body">
+          <h3>Լևոն II Մեծ</h3>
+          <div class="years">1187–1219</div>
+          <p>Կիլիկիայի թագավորության արքան, ով Եվրոպայից ստացավ թագավորական տիտղոս։</p>
+        </div>
+      </div>
+
+      <div class="king-card reveal">
+        <div class="king-portrait-wrap">
+          <img class="king-portrait" src="images/khosrov.jpg" alt="Խոսրով Ա">
+        </div>
+        <div class="king-body">
+          <h3>Խոսրով Ա</h3>
+          <div class="years">Ք.հ. 217–238</div>
+          <p>Հայոց արքա, ով պահպանեց պետության անկախությունը Հռոմի և Պարթևստանի միջև։</p>
+        </div>
+      </div>
+
+      <div class="king-card reveal">
+        <div class="king-portrait-wrap">
+          <img class="king-portrait" src="images/vramshapuh.jpg" alt="Վռամշապուհ">
+        </div>
+        <div class="king-body">
+          <h3>Վռամշապուհ</h3>
+          <div class="years">392–414</div>
+          <p>Հայոց արքա, ում օրոք Մեսրոպ Մաշտոցը ստեղծեց հայոց այբուբենը (405 թ.):</p>
+        </div>
+      </div>
+
+      <div class="king-card reveal">
+        <div class="king-portrait-wrap">
+          <img class="king-portrait" src="images/ashot3.jpg" alt="Աշոտ Գ">
+        </div>
+        <div class="king-body">
+          <h3>Աշոտ Գ Ողորմած</h3>
+          <div class="years">953–977</div>
+          <p>Բագրատունյաց արքա, ով հայտնի էր արդարությամբ։ Անին դարձավ մշակութային կենտրոն։</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-prev">
+      <a class="next-link" onclick="router.go('flags')"><div><div class="label">Հաջորդ →</div><div class="title">Պատմական դրոշներ</div></div><div class="arrow">→</div></a>
+      <a class="next-link" onclick="router.go('history')"><div><div class="label">← Նախորդ</div><div class="title">Պատմություն</div></div><div class="arrow">←</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FLAGS ==================== -->
+<div class="page" id="page-flags">
+  <div class="page-hero">
+    <div class="page-number">ԲԱԺԻՆ III</div>
+    <h1 class="page-title">Պատմական <span class="accent">դրոշներ</span></h1>
+    <div class="page-ornament">❖</div>
+    <p class="page-subtitle">Հայկական դրոշները՝ պատմության խորհրդանիշները</p>
+  </div>
+
+  <div class="container">
+    <div class="flags-grid">
+      <div class="flag-card reveal">
+        <div class="flag-visual">
+          <img src="images/flag-am.png" alt="Ժամանակակից դրոշ">
+        </div>
+        <h4>Ժամանակակից Դրոշ</h4>
+        <div class="era">1990 – այժմ</div>
+        <p>Հայաստանի Հանրապետության պետական դրոշը՝ կարմիր, կապույտ և նարնջագույն գույներով։</p>
+      </div>
+
+      <div class="flag-card reveal">
+        <div class="flag-visual">
+          <img src="images/flag-first-rep.png" alt="Առաջին Հանրապետություն" style="object-fit:contain;">
+        </div>
+        <h4>Առաջին Հանրապետության Դրոշ</h4>
+        <div class="era">1918–1920</div>
+        <p>Հայաստանի Առաջին Հանրապետության դրոշը՝ ընդունված 1918 թվականի մայիսի 28-ին։</p>
+      </div>
+
+      <div class="flag-card reveal">
+        <div class="flag-visual">
+          <img src="images/flag-ssr.png" alt="ՀԽՍՀ" style="object-fit:contain;">
+        </div>
+        <h4>Հայկական ԽՍՀ Դրոշ</h4>
+        <div class="era">1952–1990</div>
+        <p>Խորհրդային Հայաստանի դրոշը՝ կարմիր ֆոնի վրա կապույտ շերտով։</p>
+      </div>
+
+      <div class="flag-card reveal">
+        <div class="flag-visual">
+          <img src="images/coat-of-arms.png" alt="Զինանշան" style="object-fit:contain;">
+        </div>
+        <h4>Հայաստանի Զինանշան</h4>
+        <div class="era">1992 – այժմ</div>
+        <p>Հայաստանի Հանրապետության զինանշանը՝ առյուծով, արծիվով և Արարատ լեռով։</p>
+      </div>
+
+      <div class="flag-card reveal">
+        <div class="flag-visual">
+          <img src="images/flag-artsakh.png" alt="Արցախ" style="object-fit:contain;">
+        </div>
+        <h4>Արցախի Դրոշ</h4>
+        <div class="era">1992 – 2023</div>
+        <p>Արցախի Հանրապետության դրոշը՝ Հայաստանի եռագույնի վրա սպիտակ նախշով։</p>
+      </div>
+
+      <div class="flag-card reveal">
+        <div class="flag-visual">
+          <img src="images/kingdom-cilicia.jpg" alt="Կիլիկիա">
+        </div>
+        <h4>Կիլիկիայի Թագավորություն</h4>
+        <div class="era">1198–1375</div>
+        <p>Կիլիկիայի հայկական թագավորության դրոշը՝ առյուծներով և խաչով։</p>
+      </div>
+    </div>
+
+    <div class="next-prev">
+      <a class="next-link" onclick="router.go('tigran')"><div><div class="label">Հաջորդ →</div><div class="title">Տիգրան Մեծ</div></div><div class="arrow">→</div></a>
+      <a class="next-link" onclick="router.go('kings')"><div><div class="label">← Նախորդ</div><div class="title">Թագավորներ</div></div><div class="arrow">←</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TIGRAN ==================== -->
+<div class="page" id="page-tigran">
+  <div class="page-hero">
+    <div class="page-number">ԲԱԺԻՆ IV</div>
+    <h1 class="page-title">Տիգրան <span class="accent">Մեծ</span></h1>
+    <div class="page-ornament">❖</div>
+    <p class="page-subtitle">Հայոց պատմության ամենահզոր արքան</p>
+  </div>
+
+  <div class="container-narrow">
+    <div class="img-box reveal" style="margin: 25px 0;">
+      <img class="content-img" src="images/tigran1.jpg" alt="Տիգրան Մեծ" style="margin:0;">
+    </div>
+    <p class="content-img-caption">Տիգրան Մեծ — Հայոց ամենահզոր արքան</p>
+
+    <div class="callout reveal">
+      <p>«Տիգրանը՝ արքաների արքան, դարձավ այն մարդը, ում անունը վախ էր ներշնչում Հռոմին և հույս՝ Արևելքի բոլոր ժողովուրդներին»</p>
+      <div class="author">— Հայկական ավանդույթ</div>
+    </div>
+
+    <div class="content-block reveal">
+      <h3 class="content-heading">Վաղ կյանք և գահակալում</h3>
+      <p><strong>Տիգրան Բ Մեծը</strong> ծնվել է Ք.ա. 140 թվականին Արտաշեսյան արքայատոհմում։ Երիտասարդ տարիներին գերի էր եղել Պարթևստանում։ Ք.ա. 95 թվականին վերադարձավ Հայաստան և գահ բարձրացավ։</p>
+      <p>Նա հիմնեց նոր մայրաքաղաք <strong>Տիգրանակերտը</strong>, որը դարձավ ժամանակի ամենագեղեցիկ քաղաքներից մեկը։</p>
+    </div>
+
+    <div class="stats-grid reveal">
+      <div class="stat-box"><div class="num">40</div><div class="label">Տարվա կառավարում</div></div>
+      <div class="stat-box"><div class="num">3</div><div class="label">Ծովերի միջև</div></div>
+      <div class="stat-box"><div class="num">500K</div><div class="label">Կմ² տարածք</div></div>
+      <div class="stat-box"><div class="num">20+</div><div class="label">Նվաճված ժողովուրդ</div></div>
+    </div>
+
+    <div class="img-box reveal" style="margin: 25px 0;">
+      <img class="content-img" src="images/tigranocerta.jpg" alt="Տիգրանակերտ" style="margin:0;">
+    </div>
+    <p class="content-img-caption">Տիգրանակերտ — Տիգրան Մեծի հիմնած մայրաքաղաքը</p>
+
+    <div class="content-block reveal">
+      <h3 class="content-heading">Կայսրության ստեղծումը</h3>
+      <p>Տիգրան Մեծը դաշնակցեց Պոնտոսի արքա <strong>Միթրիդատ Եվպատորի</strong> հետ։ Ք.ա. 83 թվականին նվաճեց Ասորիքը և Կիլիկիան՝ դարձնելով Հայաստանը արևելքի ամենահզոր պետությունը։</p>
+      <p>Նրա կայսրությունը ձգվում էր <em>Կասպից ծովից մինչև Միջերկրական</em>։</p>
+    </div>
+
+    <div class="next-prev">
+      <a class="next-link" onclick="router.go('timeline')"><div><div class="label">Հաջորդ →</div><div class="title">Ժամանակագիծ</div></div><div class="arrow">→</div></a>
+      <a class="next-link" onclick="router.go('flags')"><div><div class="label">← Նախորդ</div><div class="title">Դրոշներ</div></div><div class="arrow">←</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TIMELINE ==================== -->
+<div class="page" id="page-timeline">
+  <div class="page-hero">
+    <div class="page-number">ԲԱԺԻՆ V</div>
+    <h1 class="page-title">Ժամանակագիծ</h1>
+    <div class="page-ornament">❖</div>
+    <p class="page-subtitle">Հայոց պատմության գլխավոր իրադարձությունները</p>
+  </div>
+
+  <div class="container-narrow">
+    <div class="timeline">
+      <div class="timeline-item reveal"><div class="date">Ք.ա. 860</div><h4>Ուրարտուի հիմնում</h4><p>Արամե թագավորը հիմնեց Ուրարտու թագավորությունը Վանա լճի ափին։</p></div>
+      <div class="timeline-item reveal"><div class="date">Ք.ա. 782</div><h4>Էրեբունու հիմնում</h4><p>Արգիշտի Ա արքան հիմնեց Էրեբունի ամրոցը — Երևանի հիմքը։</p></div>
+      <div class="timeline-item reveal"><div class="date">Ք.ա. 585</div><h4>Ուրարտուի անկում</h4><p>Հայկական ցեղերը սկսեցին միավորվել նոր պետության շուրջ։</p></div>
+      <div class="timeline-item reveal"><div class="date">Ք.ա. 331</div><h4>Անկախության վերականգնում</h4><p>Ալեքսանդր Մակեդոնացու կայսրության փլուզումից հետո ձևավորվեցին հայկական պետություններ։</p></div>
+      <div class="timeline-item reveal"><div class="date">Ք.ա. 189</div><h4>Արտաշեսյան հարստություն</h4><p>Արտաշես Ա-ն հիմնեց Արտաշեսյան արքայատոհմը։</p></div>
+      <div class="timeline-item reveal"><div class="date">Ք.ա. 95</div><h4>Տիգրան Մեծի գահակալում</h4><p>Տիգրան Բ-ն բարձրացավ Հայոց գահին։</p></div>
+      <div class="timeline-item reveal"><div class="date">Ք.ա. 83</div><h4>Կայսրության գագաթնակետ</h4><p>Հայաստանը դարձավ արևելքի ամենահզոր պետությունը։</p></div>
+      <div class="timeline-item reveal"><div class="date">Ք.ա. 66</div><h4>Հաշտություն Հռոմի հետ</h4><p>Տիգրանը Պոմպեոսի հետ կնքեց հաշտության պայմանագիր։</p></div>
+      <div class="timeline-item reveal"><div class="date">301</div><h4>Քրիստոնեության ընդունում</h4><p>Հայաստանը դարձավ աշխարհում առաջին քրիստոնյա պետությունը։</p></div>
+      <div class="timeline-item reveal"><div class="date">405</div><h4>Հայոց այբուբեն</h4><p>Մեսրոպ Մաշտոցը ստեղծեց հայոց այբուբենը։</p></div>
+      <div class="timeline-item reveal"><div class="date">885</div><h4>Բագրատունյաց թագավորություն</h4><p>Աշոտ Ա Մեծը վերականգնեց հայոց անկախ թագավորությունը։</p></div>
+      <div class="timeline-item reveal"><div class="date">961</div><h4>Անին՝ մայրաքաղաք</h4><p>Աշոտ Գ Ողորմածը Անին հռչակեց մայրաքաղաք։</p></div>
+      <div class="timeline-item reveal"><div class="date">1198</div><h4>Կիլիկյան թագավորություն</h4><p>Լևոն Բ Մեծը հիմնեց հայկական թագավորությունը Կիլիկիայում։</p></div>
+      <div class="timeline-item reveal"><div class="date">1375</div><h4>Կիլիկիայի անկում</h4><p>Մամլուքների նվաճումների հետևանքով թագավորությունը անկում ապրեց։</p></div>
+      <div class="timeline-item reveal"><div class="date">1918</div><h4>Առաջին Հանրապետություն</h4><p>Մայիսի 28-ին հռչակվեց Հայաստանի Առաջին Հանրապետությունը։</p></div>
+      <div class="timeline-item reveal"><div class="date">1991</div><h4>Անկախ Հայաստան</h4><p>Սեպտեմբերի 21-ին Հայաստանը հռչակեց իր անկախությունը։</p></div>
+    </div>
+
+    <div class="next-prev">
+      <a class="next-link" onclick="router.go('culture')"><div><div class="label">Հաջորդ →</div><div class="title">Մշակույթ</div></div><div class="arrow">→</div></a>
+      <a class="next-link" onclick="router.go('tigran')"><div><div class="label">← Նախորդ</div><div class="title">Տիգրան Մեծ</div></div><div class="arrow">←</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CULTURE ==================== -->
+<div class="page" id="page-culture">
+  <div class="page-hero">
+    <div class="page-number">ԲԱԺԻՆ VI</div>
+    <h1 class="page-title">Հոգևոր <span class="accent">ժառանգություն</span></h1>
+    <div class="page-ornament">❖</div>
+    <p class="page-subtitle">Այբուբեն, խաչքարեր, ձեռագրեր, ճարտարապետություն</p>
+  </div>
+
+  <div class="container-narrow">
+    <div class="img-box reveal" style="margin: 25px 0;">
+      <img class="content-img" src="images/alphabet.jpg" alt="Հայոց այբուբեն" style="margin:0;">
+    </div>
+    <p class="content-img-caption">Հայոց այբուբեն — ազգային մշակույթի հիմք</p>
+
+    <div class="content-block reveal">
+      <h3 class="content-heading">Հայոց այբուբեն</h3>
+      <p>405 թվականին <strong>Մեսրոպ Մաշտոցը</strong> ստեղծեց հայոց այբուբենը։ Այն դարձավ հայ մշակույթի հիմնաքարը՝ հնարավորություն տալով զարգացնել ազգային ինքնությունը։</p>
+    </div>
+
+    <div class="img-box reveal" style="margin: 25px 0;">
+      <img class="content-img" src="images/khachkar.jpg" alt="Խաչքար" style="margin:0;">
+    </div>
+    <p class="content-img-caption">Խաչքար — հայկական սրբազան արվեստ</p>
+
+    <div class="content-block reveal">
+      <h3 class="content-heading">Խաչքարեր</h3>
+      <p><strong>Խաչքարերը</strong> հայկական յուրահատուկ մշակութային երևույթ են։ 2010 թվականին ՅՈՒՆԵՍԿՕ-ն հայկական խաչքարային արվեստը ներառեց Մարդկության ոչ նյութական մշակութային ժառանգության ցանկում։</p>
+    </div>
+
+    <div class="img-box reveal" style="margin: 25px 0;">
+      <img class="content-img" src="images/matenadaran.jpg" alt="Մատենադարան" style="margin:0;">
+    </div>
+    <p class="content-img-caption">Մատենադարան — հին ձեռագրերի ինստիտուտ Երևանում</p>
+
+    <div class="content-block reveal">
+      <h3 class="content-heading">Ձեռագրեր և Մատենադարան</h3>
+      <p><strong>Մատենադարանում</strong> պահվում են ավելի քան <em>23,000 ձեռագիր</em>։ Հայկական մանրանկարչությունը համաշխարհային մշակույթի գոհար է։</p>
+    </div>
+
+    <div class="img-box reveal" style="margin: 25px 0;">
+      <img class="content-img" src="images/geghard.jpg" alt="Գեղարդ" style="margin:0;">
+    </div>
+    <p class="content-img-caption">Գեղարդի վանք — ՅՈՒՆԵՍԿՕ-ի ժառանգություն</p>
+
+    <div class="next-prev">
+      <a class="next-link" onclick="router.go('gallery')"><div><div class="label">Հաջորդ →</div><div class="title">Պատկերասրահ</div></div><div class="arrow">→</div></a>
+      <a class="next-link" onclick="router.go('timeline')"><div><div class="label">← Նախորդ</div><div class="title">Ժամանակագիծ</div></div><div class="arrow">←</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== GALLERY ==================== -->
+<div class="page" id="page-gallery">
+  <div class="page-hero">
+    <div class="page-number">ԲԱԺԻՆ VII</div>
+    <h1 class="page-title">Պատկերասրահ</h1>
+    <div class="page-ornament">❖</div>
+    <p class="page-subtitle">Հայկական մշակույթի սրբազան վայրերը</p>
+  </div>
+
+  <div class="container">
+    <div class="gallery-grid">
+      <div class="gallery-item reveal"><img src="images/gallery-geghard.jpg" alt="Գեղարդ"><div class="gallery-caption">ԳԵՂԱՐԴ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-khor-virap.jpg" alt="Խոր Վիրապ"><div class="gallery-caption">ԽՈՐ ՎԻՐԱՊ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-tsaghkadzor.jpg" alt="Ծաղկաձոր"><div class="gallery-caption">ԾԱՂԿԱՁՈՐ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-ararat.jpg" alt="Արարատ"><div class="gallery-caption">ԱՐԱՐԱՏ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-yerevan.jpg" alt="Երևան"><div class="gallery-caption">ԵՐԵՎԱՆ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-ani.jpg" alt="Անի"><div class="gallery-caption">ԱՆԻ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-sevan.jpg" alt="Սևանավանք"><div class="gallery-caption">ՍԵՎԱՆԱՎԱՆՔ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-tatev.jpg" alt="Տաթև"><div class="gallery-caption">ՏԱԹԵՎ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-noravank.jpg" alt="Նորավանք"><div class="gallery-caption">ՆՈՐԱՎԱՆՔ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-haghpat.jpg" alt="Հաղպատ"><div class="gallery-caption">ՀԱՂՊԱՏ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-garni.jpg" alt="Գառնի"><div class="gallery-caption">ԳԱՌՆԻ</div></div>
+      <div class="gallery-item reveal"><img src="images/gallery-etchmiadzin.jpg" alt="Էջմիածին"><div class="gallery-caption">ԷՋՄԻԱԾԻՆ</div></div>
+    </div>
+
+    <div class="next-prev">
+      <a class="next-link" onclick="router.go('home')"><div><div class="label">Վերադառնալ →</div><div class="title">Գլխավոր էջ</div></div><div class="arrow">→</div></a>
+      <a class="next-link" onclick="router.go('culture')"><div><div class="label">← Նախորդ</div><div class="title">Մշակույթ</div></div><div class="arrow">←</div></a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <img class="footer-flag" src="images/flag-am.png" alt="Դրոշ">
+  <h4>ՀԱՅԱՍՏԱՆ</h4>
+  <p>Հավերժ փառք Մեծ Տիգրանին 🇦🇲</p>
+  <p class="motto-line">«Մեկ ազգ, մեկ մշակույթ, մեկ հայրենիք»</p>
+</footer>
+
+<button class="scroll-top" id="scrollTop">↑</button>
+
+<script>
+  // ============ ROUTER ============
+  const router = {
+    routes: ['home', 'history', 'kings', 'flags', 'tigran', 'timeline', 'culture', 'gallery'],
+    current: 'home',
+
+    go(route) {
+      if (!this.routes.includes(route)) route = 'home';
+      this.current = route;
+
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const page = document.getElementById('page-' + route);
+      if (page) {
+        page.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => activateRevealsInPage(page), 100);
+      }
+
+      document.querySelectorAll('[data-route]').forEach(a => {
+        a.classList.toggle('active', a.dataset.route === route);
+      });
+
+      if (location.hash !== '#' + route) {
+        history.replaceState(null, '', '#' + route);
+      }
+
+      closeMenu();
+      haptic();
+    },
+
+    init() {
+      const hash = location.hash.replace('#', '');
+      const initial = this.routes.includes(hash) ? hash : 'home';
+      this.go(initial);
+
+      window.addEventListener('hashchange', () => {
+        const hash = location.hash.replace('#', '');
+        if (this.routes.includes(hash)) this.go(hash);
+      });
+    }
+  };
+
+  // ============ REVEAL ============
+  let revealObserver = null;
+
+  if ('IntersectionObserver' in window) {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  }
+
+  function activateRevealsInPage(page) {
+    if (!page) return;
+    page.querySelectorAll('.reveal:not(.active)').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 60 && rect.bottom > 0) {
+        el.classList.add('active');
+      } else if (revealObserver) {
+        revealObserver.observe(el);
+      } else {
+        el.classList.add('active');
+      }
+    });
+  }
+
+  // ============ MENU ============
+  const menuBtn = document.getElementById('menuBtn');
+  const closeBtn = document.getElementById('closeBtn');
+  const navMenu = document.getElementById('navMenu');
+  const navOverlay = document.getElementById('navOverlay');
+
+  function openMenu() {
+    navMenu.classList.add('open');
+    navOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    haptic();
+  }
+
+  function closeMenu() {
+    navMenu.classList.remove('open');
+    navOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  menuBtn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  navOverlay.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('[data-route]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.go(link.dataset.route);
+    });
+  });
+
+  // ============ SCROLL TOP ============
+  const scrollTopBtn = document.getElementById('scrollTop');
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scrollTopBtn.classList.toggle('visible', scrollTop > 200);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    haptic();
+  });
+
+  // ============ HAPTIC ============
+  function haptic() {
+    if ('vibrate' in navigator) { try { navigator.vibrate(8); } catch(e) {} }
+  }
+
+  document.querySelectorAll('.menu-btn, .close-btn, .scroll-top, .nav-menu a, .btn').forEach(el => {
+    el.addEventListener('touchstart', haptic, { passive: true });
+  });
+
+  // ============ INIT ============
+  document.addEventListener('DOMContentLoaded', () => {
+    router.init();
+    setTimeout(() => {
+      activateRevealsInPage(document.querySelector('.page.active'));
+    }, 400);
+  });
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      activateRevealsInPage(document.querySelector('.page.active'));
+    }, 300);
+  });
+
+  console.log('%c🇦🇲 Հայաստան — Մեծ Տիգրանի Ժառանգությունը', 'color: #7a1f1f; font-size: 16px; font-weight: bold;');
+  console.log('%c✓ Բոլոր նկարները լոկալ են (images/ պանակից)', 'color: #b8860b; font-size: 12px;');
+</script>
+
+</body>
+</html>
